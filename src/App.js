@@ -30,20 +30,32 @@ const data = [
   }
 ];
 
-function App() {
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <select>
-          {data.map(model => (
-            <option value={model.name}>
-              {model.name}, ({model.year}}
-            </option>
-          ))}
-        </select>
-      </div>
-    </Provider>
-  );
+class App extends React.Component {
+  state = {
+    value: ""
+  };
+  updateSelection = event => {
+    this.setState({
+      value: event.target.value
+    });
+  };
+  render() {
+    // console.log(this.state);
+    return (
+      <Provider store={store}>
+        <div className="App">
+          <select value={this.state.value} onChange={this.updateSelection}>
+            <option>-- pick a model --</option>
+            {data.map(model => (
+              <option value={model.name}>
+                {model.name}, ({model.year}}
+              </option>
+            ))}
+          </select>
+        </div>
+      </Provider>
+    );
+  }
 }
 
 export default App;
