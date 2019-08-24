@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
-import ModelData from "./components/ModelData";
+import ModelDetailsContainer from "./components/ModelDetailsContainer";
 
 const data = [
   {
@@ -50,7 +50,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <ModelData models={this.props.models} />
+        {this.props.models.length > 0 && (
+          <ModelDetailsContainer models={this.props.models} />
+        )}
         <select value={this.state.value} onChange={this.updateSelection}>
           <option>-- pick a model --</option>
           {data.map(model => (
