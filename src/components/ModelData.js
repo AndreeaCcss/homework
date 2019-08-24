@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 export default class ModelData extends React.Component {
   static propTypes = {
     models: PropTypes.array.isRequired
+    // name: PropTypes.string.isRequired,
+    // description: PropTypes.string.isRequired,
+    // year: PropTypes.number.isRequired,
+    // origin: PropTypes.string.isRequired
   };
 
   render() {
