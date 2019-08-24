@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Provider } from "react-redux";
-import store from "./store";
+import { connect } from "react-redux";
 
 const data = [
   {
@@ -32,30 +31,38 @@ const data = [
 
 class App extends React.Component {
   state = {
-    value: ""
+    name: ""
   };
   updateSelection = event => {
-    this.setState({
-      value: event.target.value
+    const selectedModel = data.find(model => model.name === event.target.value);
+    this.setState(selectedModel);
+  };
+  handleSubmit = () => {
+    // console.log("Your model is: " + this.state.name);
+    // console.log("props", this.props);
+    this.props.dispatch({
+      type: "ADD_MODEL",
+      payload: this.state
     });
   };
   render() {
-    // console.log(this.state);
+    // console.log("current state", this.state);
     return (
-      <Provider store={store}>
-        <div className="App">
-          <select value={this.state.value} onChange={this.updateSelection}>
-            <option>-- pick a model --</option>
-            {data.map(model => (
-              <option value={model.name}>
-                {model.name}, ({model.year}}
-              </option>
-            ))}
-          </select>
-        </div>
-      </Provider>
+      <div className="App">
+        <select value={this.state.value} onChange={this.updateSelection}>
+          <option>-- pick a model --</option>
+          {data.map(model => (
+            <option value={model.name} key={model.name}>
+              {model.name}, ({model.year}}
+            </option>
+          ))}
+        </select>
+        <button type="submit" onClick={this.handleSubmit}>
+          Add
+        </button>
+      </div>
     );
   }
 }
 
-export default App;
+export default connect()(App);
