@@ -31,8 +31,6 @@ const data = [
 ];
 
 function App() {
-  console.log(data.map(model => model.name));
-
   return (
     <Provider store={store}>
       <div className="App">
@@ -47,10 +45,5 @@ function App() {
     </Provider>
   );
 }
-// {props.pizzas.map(pizza => (
-//   <li key={pizza.id} onClick={() => props.selectPizza(pizza.id)}>
-//     {pizza.name}
-//   </li>
-// ))}
 
 export default App;
