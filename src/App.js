@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { connect } from "react-redux";
+import ModelData from "./components/ModelData";
 
 const data = [
   {
@@ -33,21 +34,23 @@ class App extends React.Component {
   state = {
     name: ""
   };
+
   updateSelection = event => {
     const selectedModel = data.find(model => model.name === event.target.value);
     this.setState(selectedModel);
   };
+
   handleSubmit = () => {
-    console.log("Your model is: " + this.state.name);
     this.props.dispatch({
       type: "ADD_MODEL",
       payload: this.state
     });
   };
+
   render() {
-    // console.log("current state", this.state);
     return (
       <div className="App">
+        <ModelData models={this.props.models} />
         <select value={this.state.value} onChange={this.updateSelection}>
           <option>-- pick a model --</option>
           {data.map(model => (
@@ -64,4 +67,10 @@ class App extends React.Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = state => {
+  return {
+    models: state
+  };
+};
+
+export default connect(mapStateToProps)(App);
