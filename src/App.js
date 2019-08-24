@@ -38,8 +38,7 @@ class App extends React.Component {
     this.setState(selectedModel);
   };
   handleSubmit = () => {
-    // console.log("Your model is: " + this.state.name);
-    // console.log("props", this.props);
+    console.log("Your model is: " + this.state.name);
     this.props.dispatch({
       type: "ADD_MODEL",
       payload: this.state
